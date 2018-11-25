@@ -22,6 +22,7 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
 
 provider:
   name: aws
@@ -33,6 +34,7 @@ provider:
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   environment:
     tableName: ${self:custom.tableName}
+    stripeSecretKey: ${self:custom.environment.stripeSecretKey}
 
   iamRoleStatements:
     - Effect: Allow
@@ -123,7 +125,7 @@ billing:
           method: post
           cors: true
           authorizer: aws_iam
-          
+
 resources:
   # DynamoDB
   - ${file(resources/dynamodb-table.yml)}
