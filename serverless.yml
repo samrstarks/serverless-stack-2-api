@@ -117,14 +117,14 @@ functions:
 
   # Create our resources with separate CloudFormation templates
   # Create our resources with separate CloudFormation templates
-billing:
-    handler: billing.main
-    events:
-      - http:
-          path: billing
-          method: post
-          cors: true
-          authorizer: aws_iam
+  billing:
+      handler: billing.main
+      events:
+        - http:
+            path: billing
+            method: post
+            cors: true
+            authorizer: aws_iam
 
 resources:
   # DynamoDB
